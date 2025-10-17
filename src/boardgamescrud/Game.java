@@ -3,7 +3,7 @@ package boardgamescrud;
 
 // Clase abstracta base que representa un juego genérico.
 
-public abstract class Game {
+public abstract class Game implements Sellable {
 
     protected int id;
     protected String name;
@@ -61,4 +61,11 @@ public abstract class Game {
                 " | Precio: $" + price +
                 " | Categoría: " + (category != null ? category.getName() : "Sin categoría");
     }
+
+    @Override
+    public double calculateFinalPrice() {
+        // Precio base sin descuentos, puede sobreescribirse en subclases
+        return price;
+    }
+
 }

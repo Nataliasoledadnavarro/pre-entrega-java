@@ -1,6 +1,7 @@
 // DigitalGame.java --> Subclase 2 de Game
 package boardgamescrud;
 // Subclase concreta que representa un juego digital.
+
 // Hereda de Game e implementa el método abstracto showDetails().
 
 public class DigitalGame extends Game {
@@ -44,4 +45,11 @@ public class DigitalGame extends Game {
     public String toString() {
         return super.toString() + " | Platform: " + platform;
     }
+
+    @Override
+    public double calculateFinalPrice() {
+        // descuento del 10% para juegos digitales
+        return price * 0.9;
+    }
+
 }
