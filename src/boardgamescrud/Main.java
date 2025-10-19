@@ -4,8 +4,7 @@ package boardgamescrud;
 
 public class Main {
     public static void main(String[] args) {
-        // Prueba de compilación
-        CrudGames crud = new CrudGames();
+        CrudCategories crud = new CrudCategories();
         crud.showMenu();
     }
 }
