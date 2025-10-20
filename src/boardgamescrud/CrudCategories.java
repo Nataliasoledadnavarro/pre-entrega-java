@@ -3,8 +3,8 @@ package boardgamescrud;
 
 import java.util.ArrayList;
 
-// CRUD de categorías.
-// Permite crear, listar, modificar y eliminar categorías desde consola.
+// CRUD de CATEGORIAS.
+// Permite crear, listar, modificar y eliminar CATEGORIAS desde consola.
 
 public class CrudCategories extends CrudConsole {
 
@@ -14,12 +14,12 @@ public class CrudCategories extends CrudConsole {
     public void showMenu() {
         int option;
         do {
-            System.out.println("\n===== MENÚ CRUD DE CATEGORÍAS =====");
+            System.out.println("\n===== MENU CRUD DE CATEGORIAS =====");
             System.out.println("1. Crear categoría");
-            System.out.println("2. Listar categorías");
+            System.out.println("2. Listar CATEGORIAS");
             System.out.println("3. Modificar categoría");
             System.out.println("4. Eliminar categoría");
-            System.out.println("0. Volver al menú principal");
+            System.out.println("0. Volver al MENU principal");
             option = readInt("Seleccione una opción: ");
 
             switch (option) {
@@ -27,7 +27,7 @@ public class CrudCategories extends CrudConsole {
                 case 2 -> listCategories();
                 case 3 -> updateCategory();
                 case 4 -> deleteCategory();
-                case 0 -> System.out.println("Volviendo al menú principal...");
+                case 0 -> System.out.println("Volviendo al MENU principal...");
                 default -> System.out.println("Opción inválida. Intente nuevamente.");
             }
 
@@ -46,11 +46,11 @@ public class CrudCategories extends CrudConsole {
         System.out.println("Categoría creada correctamente.");
     }
 
-    // Listar todas las categorías
+    // Listar todas las CATEGORIAS
     private void listCategories() {
-        System.out.println("\n--- Lista de categorías ---");
+        System.out.println("\n--- Lista de CATEGORIAS ---");
         if (categories.isEmpty()) {
-            System.out.println("No hay categorías cargadas.");
+            System.out.println("No hay CATEGORIAS cargadas.");
             return;
         }
 
@@ -63,7 +63,7 @@ public class CrudCategories extends CrudConsole {
     private void updateCategory() {
         System.out.println("\n--- Modificar categoría ---");
         if (categories.isEmpty()) {
-            System.out.println("No hay categorías para modificar.");
+            System.out.println("No hay CATEGORIAS para modificar.");
             return;
         }
 
@@ -88,7 +88,7 @@ public class CrudCategories extends CrudConsole {
     private void deleteCategory() {
         System.out.println("\n--- Eliminar categoría ---");
         if (categories.isEmpty()) {
-            System.out.println("No hay categorías para eliminar.");
+            System.out.println("No hay CATEGORIAS para eliminar.");
             return;
         }
 

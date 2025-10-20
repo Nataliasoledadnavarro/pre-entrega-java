@@ -12,8 +12,8 @@ public abstract class CrudConsole {
     // Scanner compartido por todos los CRUD
     protected Scanner scanner = new Scanner(System.in);
 
-    // Muestra el menú principal del CRUD y gestiona las opciones seleccionadas.
-    // Cada clase hija implementará su propio menú.
+    // Muestra el MENU principal del CRUD y gestiona las opciones seleccionadas.
+    // Cada clase hija implementará su propio MENU.
 
     public abstract void showMenu();
 
@@ -40,7 +40,7 @@ public abstract class CrudConsole {
             scanner.next(); // limpiar entrada no válida
         }
         int value = scanner.nextInt();
-        scanner.nextLine(); // limpiar salto de línea
+        scanner.nextLine(); 
         return value;
     }
 
@@ -53,7 +53,7 @@ public abstract class CrudConsole {
             scanner.next();
         }
         double value = scanner.nextDouble();
-        scanner.nextLine(); // limpiar salto de línea
+        scanner.nextLine(); 
         return value;
     }
 }

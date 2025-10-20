@@ -16,12 +16,12 @@ public class CrudGames extends CrudConsole {
     public void showMenu() {
         int option;
         do {
-            System.out.println("\n===== MENÚ CRUD DE JUEGOS =====");
+            System.out.println("\n===== MENU CRUD DE JUEGOS =====");
             System.out.println("1. Crear juego");
             System.out.println("2. Listar juegos");
             System.out.println("3. Modificar juego");
             System.out.println("4. Eliminar juego");
-            System.out.println("0. Volver al menú principal");
+            System.out.println("0. Volver al MENU principal");
             option = readInt("Seleccione una opción: ");
 
             switch (option) {
@@ -29,7 +29,7 @@ public class CrudGames extends CrudConsole {
                 case 2 -> listGames();
                 case 3 -> updateGame();
                 case 4 -> deleteGame();
-                case 0 -> System.out.println("Volviendo al menú principal...");
+                case 0 -> System.out.println("Volviendo al MENU principal...");
                 default -> System.out.println("Opción inválida. Intente nuevamente.");
             }
 
