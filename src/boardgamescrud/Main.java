@@ -2,6 +2,7 @@
 
 package boardgamescrud;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 //Clase principal del sistema.
@@ -11,10 +12,10 @@ public class Main {
 
     public static void main(String[] args) {
 
+        ArrayList<Category> sharedCategories = new ArrayList<>(); // Unica fuente de verdad para las CATEGORIAS
         Scanner scanner = new Scanner(System.in);
-        CrudGames crudGames = new CrudGames();
-        CrudCategories crudCategories = new CrudCategories();
-
+        CrudGames crudGames = new CrudGames(sharedCategories);
+        CrudCategories crudCategories = new CrudCategories(sharedCategories); 
         int option;
 
         do {
@@ -30,7 +31,7 @@ public class Main {
             }
 
             option = scanner.nextInt();
-            scanner.nextLine(); 
+            scanner.nextLine();
 
             switch (option) {
                 case 1 -> crudGames.showMenu();

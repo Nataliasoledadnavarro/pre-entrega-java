@@ -8,7 +8,12 @@ import java.util.ArrayList;
 
 public class CrudCategories extends CrudConsole {
 
-    private ArrayList<Category> categories = new ArrayList<>();
+    private ArrayList<Category> categories;
+
+    // Constructor que recibe la lista compartida
+    public CrudCategories(ArrayList<Category> sharedCategories) {
+        this.categories = sharedCategories;
+    }
 
     @Override
     public void showMenu() {

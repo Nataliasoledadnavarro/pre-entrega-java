@@ -25,6 +25,9 @@ public abstract class Game implements Sellable {
     }
 
     public void setId(int id) {
+        if (id < 0) {
+            throw new IllegalArgumentException("El ID no puede ser negativo");
+        }
         this.id = id;
     }
 
@@ -33,7 +36,10 @@ public abstract class Game implements Sellable {
     }
 
     public void setName(String name) {
-        this.name = name;
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("El nombre no puede estar vacío");
+        }
+        this.name = name.trim();
     }
 
     public double getPrice() {
@@ -41,6 +47,9 @@ public abstract class Game implements Sellable {
     }
 
     public void setPrice(double price) {
+        if (price < 0) {
+            throw new IllegalArgumentException("El precio no puede ser negativo");
+        }
         this.price = price;
     }
 
@@ -49,6 +58,12 @@ public abstract class Game implements Sellable {
     }
 
     public void setCategory(Category category) {
+        if (category == null) {
+            throw new IllegalArgumentException("La categoría es requerida");
+        }
+        if (category.getName() == null || category.getName().trim().isEmpty()) {
+            throw new IllegalArgumentException("La categoría debe tener un nombre válido");
+        }
         this.category = category;
     }
 
@@ -59,7 +74,7 @@ public abstract class Game implements Sellable {
         return "ID: " + id +
                 " | Nombre: " + name +
                 " | Precio: $" + price +
-                " | Categoría: " + (category != null ? category.getName() : "Sin categoría");
+                " | Categoría: " + category.getName();
     }
 
     @Override

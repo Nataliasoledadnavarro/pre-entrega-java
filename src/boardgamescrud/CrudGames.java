@@ -11,6 +11,12 @@ import java.util.ArrayList;
 public class CrudGames extends CrudConsole {
 
     private ArrayList<Game> games = new ArrayList<>();
+    private ArrayList<Category> categories;
+
+    // Constructor que recibe la lista compartida
+    public CrudGames(ArrayList<Category> sharedCategories) {
+        this.categories = sharedCategories;
+    }
 
     @Override
     public void showMenu() {
@@ -40,6 +46,13 @@ public class CrudGames extends CrudConsole {
     private void createGame() {
         System.out.println("\n--- Crear nuevo juego ---");
 
+        // VALIDACIÓN: Verificar que haya categorías disponibles
+        if (categories.isEmpty()) {
+            System.out.println("Atención: Debes crear categorías para asociar al juego.");
+            System.out.println("Volve al menú principal y creá categorías.");
+            return;
+        }
+
         int id = games.size() + 1;
         String name = readString("Ingrese el nombre del juego: ");
         double price = readDouble("Ingrese el precio: ");
@@ -53,17 +66,35 @@ public class CrudGames extends CrudConsole {
             int players = readInt("Ingrese la cantidad de jugadores: ");
             String type = readString("Ingrese el tipo de juego (ej. Estrategia, Colaborativo, Familiar...): ");
             int playTime = readInt("Ingrese la duración promedio (en minutos): ");
-            newGame = new BoardGame(id, name, price, null, players, type, playTime);
+            newGame = new BoardGame(id, name, price, selectCategory(), players, type, playTime);
         } else {
             String platform = readString("Ingrese la plataforma (PC, Mobile, etc.): ");
-            newGame = new DigitalGame(id, name, price, null, platform);
+            newGame = new DigitalGame(id, name, price, selectCategory(), platform);
         }
 
         games.add(newGame);
-        System.out.println("✅ Juego creado correctamente.");
+        System.out.println("Juego creado correctamente.");
     }
 
-    //Listar todos los juegos
+    // Método para seleccionar categoría
+    private Category selectCategory() {
+        System.out.println("\n--- Seleccionar categoría ---");
+
+        for (int i = 0; i < categories.size(); i++) {
+            System.out.println((i + 1) + ". " + categories.get(i).getName());
+        }
+
+        int option;
+        while (true) {
+            option = readInt("Seleccione una categoría (1-" + categories.size() + "): ");
+            if (option >= 1 && option <= categories.size()) {
+                return categories.get(option - 1);
+            }
+            System.out.println("Opción inválida. Intente nuevamente.");
+        }
+    }
+
+    // Listar todos los juegos
     private void listGames() {
         System.out.println("\n--- Lista de juegos ---");
         if (games.isEmpty()) {
@@ -76,7 +107,7 @@ public class CrudGames extends CrudConsole {
         }
     }
 
-    // EDitar un juego 
+    // EDitar un juego
     private void updateGame() {
         System.out.println("\n--- Modificar juego ---");
         if (games.isEmpty()) {
@@ -101,7 +132,7 @@ public class CrudGames extends CrudConsole {
         System.out.println("Juego actualizado correctamente.");
     }
 
-    //  Eliminar un juego
+    // Eliminar un juego
     private void deleteGame() {
         System.out.println("\n--- Eliminar juego ---");
         if (games.isEmpty()) {
