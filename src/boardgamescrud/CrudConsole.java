@@ -31,29 +31,44 @@ public abstract class CrudConsole {
         return input;
     }
 
-    // Lee un número entero desde consola con validación básica.
+    // Lee un número entero desde consola e implmenta validaciones.
 
     protected int readInt(String message) {
-        System.out.print(message);
-        while (!scanner.hasNextInt()) {
-            System.out.print("Ingrese un número válido: ");
-            scanner.next(); // limpiar entrada no válida
+        while (true) {
+            try {
+                System.out.print(message);
+                String input = scanner.nextLine().trim();
+                int value = Integer.parseInt(input);
+
+                if (value < 0) {
+                    System.out.println("El número no puede ser negativo. Intente nuevamente.");
+                    continue;
+                }
+
+                return value;
+            } catch (NumberFormatException e) {
+                System.out.println("Debe ser un número entero válido. Intente nuevamente.");
+            }
         }
-        int value = scanner.nextInt();
-        scanner.nextLine(); 
-        return value;
     }
 
-    // Lee un número decimal (double) desde consola con validación básica.
-
+    // Lee un número decimal (double) desde consola e implmenta validaciones.
     protected double readDouble(String message) {
-        System.out.print(message);
-        while (!scanner.hasNextDouble()) {
-            System.out.print("Ingrese un valor numérico válido: ");
-            scanner.next();
+        while (true) {
+            try {
+                System.out.print(message);
+                String input = scanner.nextLine().trim();
+                double value = Double.parseDouble(input);
+                
+                if (value < 0) {
+                    System.out.println("El precio no puede ser negativo. Intente nuevamente.");
+                    continue;
+                }
+                
+                return value;
+            } catch (NumberFormatException e) {
+                System.out.println("Debe ser un número válido (use punto para decimales). Intente nuevamente.");
+            }
         }
-        double value = scanner.nextDouble();
-        scanner.nextLine(); 
-        return value;
     }
 }
