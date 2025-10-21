@@ -25,6 +25,9 @@ public class Category {
     }
 
     public void setId(int id) {
+        if (id < 0) {
+            throw new IllegalArgumentException("El ID no puede ser negativo.");
+        }
         this.id = id;
     }
 
@@ -33,6 +36,9 @@ public class Category {
     }
 
     public void setName(String name) {
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("El nombre no puede estar vacío.");
+        }
         this.name = name;
     }
 
@@ -41,6 +47,9 @@ public class Category {
     }
 
     public void setDescription(String description) {
+        if (description == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("La descipción es requerida.");
+        }
         this.description = description;
     }
 

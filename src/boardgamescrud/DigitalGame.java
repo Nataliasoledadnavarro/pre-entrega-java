@@ -25,6 +25,9 @@ public class DigitalGame extends Game {
     }
 
     public void setPlatform(String platform) {
+        if (platform == null || platform.trim().isEmpty()) {
+            throw new IllegalArgumentException("La plataforma es requerida.");
+        }
         this.platform = platform;
     }
 
