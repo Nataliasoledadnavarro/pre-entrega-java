@@ -1,126 +1,97 @@
 //CrudCategories.java --> CRUD auxiliar
 package boardgamescrud;
-
 import java.util.ArrayList;
+/**
+ * CRUD específico para categorías.
+ * Extiende CrudConsole<Category> para manejar objetos de tipo Category.
+ */
+public class CrudCategories extends CrudConsole<Category> {
 
-// CRUD de CATEGORIAS.
-// Permite crear, listar, modificar y eliminar CATEGORIAS desde consola.
+    @Override
+    public void create() {
+        System.out.println("\n--- Crear nueva categoría ---");
 
-public class CrudCategories extends CrudConsole {
+        int id = items.size() + 1;
+        String name = readString("Ingrese el nombre de la categoría: ");
+        String description = readString("Ingrese la descripción: ");
 
-    private ArrayList<Category> categories;
-
-    // Constructor que recibe la lista compartida
-    public CrudCategories(ArrayList<Category> sharedCategories) {
-        this.categories = sharedCategories;
+        Category newCategory = new Category(id, name, description);
+        items.add(newCategory);
+        System.out.println("*** Categoría creada correctamente. ***");
     }
 
     @Override
-    public void showMenu() {
-        int option;
-        do {
-            System.out.println("\n===== MENU CRUD DE CATEGORIAS =====");
-            System.out.println("1. Crear categoría");
-            System.out.println("2. Listar CATEGORIAS");
-            System.out.println("3. Modificar categoría");
-            System.out.println("4. Eliminar categoría");
-            System.out.println("0. Volver al MENU principal");
-            option = readInt("Seleccione una opción: ");
-
-            switch (option) {
-                case 1 -> createCategory();
-                case 2 -> listCategories();
-                case 3 -> updateCategory();
-                case 4 -> deleteCategory();
-                case 0 -> System.out.println("Volviendo al MENU principal...");
-                default -> System.out.println("Opción inválida. Intente nuevamente.");
-            }
-
-        } while (option != 0);
-    }
-
-    // Crear nueva categoría
-    private void createCategory() {
-        System.out.println("\n--- Crear nueva categoría ---");
-        int id = categories.size() + 1;
-        String name = readString("Ingrese el nombre de la categoría: ");
-        String description = readString("Ingrese una breve descripción: ");
-
-        Category newCategory = new Category(id, name, description);
-        categories.add(newCategory);
-        System.out.println("Categoría creada correctamente.");
-    }
-
-    // Listar todas las CATEGORIAS
-    private void listCategories() {
-        System.out.println("\n--- Lista de CATEGORIAS ---");
-        if (categories.isEmpty()) {
-            System.out.println("No hay CATEGORIAS cargadas.");
+    public void list() {
+        System.out.println("\n--- Lista de Categorías ---");
+        
+        if (items.isEmpty()) {
+            System.out.println("xxx No hay categorías registradas. xxx");
             return;
         }
 
-        for (Category c : categories) {
-            System.out.println(c);
+        for (Category category : items) {
+            System.out.println(category.toString());
         }
     }
 
-    // Modificar una categoría
-    private void updateCategory() {
-        System.out.println("\n--- Modificar categoría ---");
-        if (categories.isEmpty()) {
-            System.out.println("No hay CATEGORIAS para modificar.");
+    @Override
+    public void update() {
+        System.out.println("\n--- Actualizar categoría ---");
+        
+        if (items.isEmpty()) {
+            System.out.println("xxx No hay categorías para actualizar. xxx");
             return;
         }
 
-        int id = readInt("Ingrese el ID de la categoría a modificar: ");
+        list();
+        int id = readInt("Ingrese el ID de la categoría a actualizar: ");
         Category category = findCategoryById(id);
 
-        if (category == null) {
-            System.out.println("No se encontró una categoría con ese ID.");
-            return;
+        if (category != null) {
+            String newName = readString("Nuevo nombre (actual: " + category.getName() + "): ");
+            String newDescription = readString("Nueva descripción (actual: " + category.getDescription() + "): ");
+
+            category.setName(newName);
+            category.setDescription(newDescription);
+            System.out.println("*** Categoría actualizada correctamente. ***");
+        } else {
+            System.out.println("xxx Categoría no encontrada. xxx");
         }
-
-        String newName = readString("Nuevo nombre (" + category.getName() + "): ");
-        String newDescription = readString("Nueva descripción (" + category.getDescription() + "): ");
-
-        category.setName(newName);
-        category.setDescription(newDescription);
-
-        System.out.println("Categoría actualizada correctamente.");
     }
 
-    // Eliminar una categoría
-    private void deleteCategory() {
+    @Override
+    public void delete() {
         System.out.println("\n--- Eliminar categoría ---");
-        if (categories.isEmpty()) {
-            System.out.println("No hay CATEGORIAS para eliminar.");
+        
+        if (items.isEmpty()) {
+            System.out.println("xxx No hay categorías para eliminar. xxx");
             return;
         }
 
+        list();
         int id = readInt("Ingrese el ID de la categoría a eliminar: ");
         Category category = findCategoryById(id);
 
-        if (category == null) {
-            System.out.println("No se encontró una categoría con ese ID.");
-            return;
+        if (category != null) {
+            items.remove(category);
+            System.out.println("*** Categoría eliminada correctamente. ***");
+        } else {
+            System.out.println("xxx Categoría no encontrada. xxx");
         }
-
-        categories.remove(category);
-        System.out.println("Categoría eliminada correctamente.");
     }
 
-    // Buscar categoría por ID
+    // Método auxiliar específico
     private Category findCategoryById(int id) {
-        for (Category c : categories) {
-            if (c.getId() == id) {
-                return c;
+        for (Category category : items) {
+            if (category.getId() == id) {
+                return category;
             }
         }
         return null;
     }
 
-    // Getter para usar desde otros CRUD
-    public ArrayList<Category> getCategories() {
-        return categories;
+    // Método para obtener la lista (para compartir con CrudGames)
+    public ArrayList<Category> getItems() {
+        return items;
     }
 }
