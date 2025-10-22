@@ -23,11 +23,14 @@ public abstract class CrudConsole<T> {
 
     public abstract void delete();
 
+    // Metodo para que cada subclase defina su título
+    public abstract String getMenuTitle();
+
     // Método para mostrar el menú (reutilizarn todos)
     public void showMenu() {
         int option;
         do {
-            System.out.println("\n===== MENU CRUD =====");
+            System.out.println("\n===== " + getMenuTitle() + " ====="); 
             System.out.println("1. Crear");
             System.out.println("2. Listar");
             System.out.println("3. Actualizar");

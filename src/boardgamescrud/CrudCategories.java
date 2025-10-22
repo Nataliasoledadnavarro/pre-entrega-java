@@ -1,6 +1,8 @@
 //CrudCategories.java --> CRUD auxiliar
 package boardgamescrud;
+
 import java.util.ArrayList;
+
 /**
  * CRUD específico para categorías.
  * Extiende CrudConsole<Category> para manejar objetos de tipo Category.
@@ -23,7 +25,7 @@ public class CrudCategories extends CrudConsole<Category> {
     @Override
     public void list() {
         System.out.println("\n--- Lista de Categorías ---");
-        
+
         if (items.isEmpty()) {
             System.out.println("xxx No hay categorías registradas. xxx");
             return;
@@ -37,7 +39,7 @@ public class CrudCategories extends CrudConsole<Category> {
     @Override
     public void update() {
         System.out.println("\n--- Actualizar categoría ---");
-        
+
         if (items.isEmpty()) {
             System.out.println("xxx No hay categorías para actualizar. xxx");
             return;
@@ -62,7 +64,7 @@ public class CrudCategories extends CrudConsole<Category> {
     @Override
     public void delete() {
         System.out.println("\n--- Eliminar categoría ---");
-        
+
         if (items.isEmpty()) {
             System.out.println("xxx No hay categorías para eliminar. xxx");
             return;
@@ -78,6 +80,11 @@ public class CrudCategories extends CrudConsole<Category> {
         } else {
             System.out.println("xxx Categoría no encontrada. xxx");
         }
+    }
+
+    @Override
+    public String getMenuTitle() {
+        return "MENU DE CATEGORIAS";
     }
 
     // Método auxiliar específico

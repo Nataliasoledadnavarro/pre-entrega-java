@@ -28,7 +28,7 @@ public class CrudGames extends CrudConsole<Game> {
             return;
         }
 
-        int id = items.size() + 1; 
+        int id = items.size() + 1;
         String name = readString("Ingrese el nombre del juego: ");
         double price = readDouble("Ingrese el precio: ");
         Category selectedCategory = selectCategory();
@@ -55,7 +55,7 @@ public class CrudGames extends CrudConsole<Game> {
     @Override
     public void list() {
         System.out.println("\n--- Lista de Juegos ---");
-        
+
         if (items.isEmpty()) {
             System.out.println("xxx No hay juegos registrados. xxx");
             return;
@@ -69,7 +69,7 @@ public class CrudGames extends CrudConsole<Game> {
     @Override
     public void update() {
         System.out.println("\n--- Actualizar juego ---");
-        
+
         if (items.isEmpty()) {
             System.out.println("xxx No hay juegos para actualizar. xxx");
             return;
@@ -94,7 +94,7 @@ public class CrudGames extends CrudConsole<Game> {
     @Override
     public void delete() {
         System.out.println("\n--- Eliminar juego ---");
-        
+
         if (items.isEmpty()) {
             System.out.println("No hay juegos para eliminar.");
             return;
@@ -112,14 +112,19 @@ public class CrudGames extends CrudConsole<Game> {
         }
     }
 
+    @Override
+    public String getMenuTitle() {
+        return "MENU DE JUEGOS";
+    }
+
     // Métodos auxiliares específicos de CrudGames
     private Category selectCategory() {
         System.out.println("\n--- Seleccionar categoría ---");
-        
+
         for (int i = 0; i < categories.size(); i++) {
             System.out.println((i + 1) + ". " + categories.get(i).getName());
         }
-        
+
         int option;
         while (true) {
             option = readInt("Seleccione una categoría (1-" + categories.size() + "): ");
