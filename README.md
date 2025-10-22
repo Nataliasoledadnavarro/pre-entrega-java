@@ -32,8 +32,8 @@ Toda la información se maneja en memoria mediante **ArrayList**, y los datos se
 - **BoardGame** y **DigitalGame** → subclases.  
 - **Category** → clase asociada a los juegos.  
 - **Sellable** → interfaz que define el comportamiento de los objetos vendibles.  
-- **CrudConsole** → clase base con métodos comunes de lectura y validación.  
-- **CrudGames / CrudCategories** → implementaciones específicas de los CRUD.  
+- **CrudConsole<T>** → clase genérica base con métodos comunes de lectura y validación.  
+- **CrudGames / CrudCategories** → implementaciones específicas que extienden CrudConsole<T>.  
 - **Main** → orquestador general de los menús.  
 
 ---
@@ -45,8 +45,19 @@ Toda la información se maneja en memoria mediante **ArrayList**, y los datos se
 - Encapsulamiento (atributos privados + getters y setters)  
 - Polimorfismo (`@Override`)  
 - Implementación de interfaz  
+- **Genéricos** (`CrudConsole<T>`, `ArrayList<T>`)  
 - Uso de `ArrayList`  
-- Validaciones básicas de entrada  
+- Validaciones básicas de entrada y setters  
+- Reutilización de código mediante clases genéricas  
+
+---
+
+## ✨ Características técnicas
+
+- **Arquitectura genérica**: La clase `CrudConsole<T>` permite reutilizar la lógica CRUD para cualquier entidad.
+- **Type Safety**: Uso de genéricos para garantizar tipos seguros en tiempo de compilación.
+- **Validaciones robustas**: Implementadas tanto en la entrada de datos como en los setters de las clases.
+- **Código limpio**: Eliminación de duplicación mediante herencia y genéricos.
 
 ---
 
